@@ -26,14 +26,8 @@ target_include_directories(gex2ps1soundexporter PRIVATE "${CMAKE_CURRENT_SOURCE_
 
 find_package(FLAC REQUIRED)
 
-find_path(FLAC_INCLUDE_DIRS_THIS_ONE NAMES encoder.h HINTS FLAC++)
-find_library(FLAC_LIBRARIES NAMES FLAC)
-
-target_include_directories(gex2ps1soundexporter PRIVATE "/usr/include/FLAC++/")
-target_link_libraries(gex2ps1soundexporter PRIVATE "/usr/lib/libFLAC++.so")
-
-message(STATUS "FLAC_INCLUDE_DIRS: ${FLAC_INCLUDE_DIRS_THIS_ONE}")
-message(STATUS "FLAC_LIBRARIES: ${FLAC_LIBRARIES}")
+target_include_directories(gex2ps1soundexporter PRIVATE ${FLAC_INCLUDE_DIRS})
+target_link_libraries(gex2ps1soundexporter PRIVATE FLAC::FLAC++)
 
 
 install(TARGETS gex2ps1soundexporter DESTINATION bin)

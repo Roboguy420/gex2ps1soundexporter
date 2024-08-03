@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}"
+    },
+
+    {
+      "name": "AMD64",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "hidden": true
+    },
+
+    {
+      "name": "Debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "hidden": true
+    },
+    {
+      "name": "Release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "hidden": true
+    },
+
+    {
+      "name": "Makefiles",
+      "generator": "Unix Makefiles",
+      "hidden": true
+    },
+
+    {
+      "name": "GCC",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      },
+      "hidden": true
+    },
+
+
+    { "name": "amd64-debug-linux", "displayName": "AMD64 Debug (Linux)", "inherits": [ "default", "AMD64", "Debug", "Makefiles", "GCC" ] },
+    { "name": "amd64-release-linux", "displayName": "AMD64 Release (Linux)", "inherits": [ "default", "AMD64", "Release", "Makefiles", "GCC" ] }
+  ]
+}

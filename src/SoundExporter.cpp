@@ -39,7 +39,7 @@ int main (int argc, char *argv[])
   };
 
   int opt;
-  while ((opt = getopt_long(argc, argv, "o", longopts, NULL)) != -1)
+  while ((opt = getopt_long(argc, argv, "o:", longopts, NULL)) != -1)
   {
     switch(opt)
     {

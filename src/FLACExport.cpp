@@ -16,6 +16,7 @@
 
 #include <FLAC++/encoder.h>
 #include <FLAC/stream_encoder.h>
+#include <filesystem>
 #include <format>
 
 #include "FLACExport.h"
@@ -27,6 +28,10 @@ int exportToFLAC()
   size_t iterator = 0;
   for (PCMData flacData : samplePCMList)
   {
+    std::filesystem::path dirName = outputFolder;
+    std::filesystem::path fileName = std::format("{}.flac", iterator);
+    std::filesystem::path fullWritePath = dirName / fileName;
+
     FLAC::Encoder::File flacFile;
     
     FLAC__int32 buffers32bit[flacData.size];
@@ -39,7 +44,7 @@ int exportToFLAC()
     flacFile.set_sample_rate(GEX2_SAMPLE_RATE);
     flacFile.set_channels(1);
     flacFile.set_bits_per_sample(GEX2_BITS_PER_SAMPLE);
-    flacFile.init(std::format("{}.flac", iterator));
+    flacFile.init(fullWritePath);
     flacFile.process_interleaved(buffers32bit, flacData.size);
 
     FLAC::Encoder::Stream::State thisState = flacFile.get_state();
